@@ -92,15 +92,19 @@ DeviceProcessEvents
 
 **Result**:  
 `7z.exe` was executed — a known compression tool.  
+![image](https://github.com/user-attachments/assets/d571b2af-be6d-4f1f-9f17-9ce1e6398e24)
 
 A suspicious PowerShell script was found associated with this execution.
+![image](https://github.com/user-attachments/assets/00c28966-4b15-4e18-87c1-f6c2d73b292f)
+
+![image](https://github.com/user-attachments/assets/9e43ca46-cde9-4eab-9d66-eba45e2ac8bf)
 
 ---
 
 ### 🔧 PowerShell Script Behaviour
 
 - **Setup**: Logging with `entropygorilla.log`
-- **Data Creation**: Fakes sensitive-looking employee CSV data
+- **Data Creation**: Create employee CSV data
 - **Tool Installation**: Silently installs `7-Zip` from an external URL
 - **Archiving**: Compresses fake CSV into `.zip` using 7-Zip
 - **Exfiltration**: Uploads to `sacyberrangedanger.blob.core.windows.net` using Azure Storage API and hardcoded keys
@@ -124,6 +128,8 @@ DeviceFileEvents
 **Finding**:  
 Multiple file creation, modification, and rename events occurred — including `.zip` and `.csv` files matching script activity.
 
+![image](https://github.com/user-attachments/assets/d7c587d0-ccfa-4180-9ad2-b6178731172b)
+
 ---
 
 ### Step 3: Check Network Activity (Exfiltration Attempt)
@@ -140,6 +146,7 @@ DeviceNetworkEvents
 
 **Finding**:  
 HTTPS network activity was observed. The destination domain matches **Azure Blob Storage**, indicating an **exfiltration attempt**.
+![image](https://github.com/user-attachments/assets/421212d5-1822-4b28-a3c6-d380ab6b5ca6)
 
 ---
 
@@ -147,7 +154,7 @@ HTTPS network activity was observed. The destination domain matches **Azure Blob
 
 - **Immediate action**: Isolated the device.
 - **Reported**: Findings communicated to management.
-- **Result**: While exfiltration was attempted, no evidence confirmed successful data extraction.
+- **Result**: Data exfiltration was confirmed to be successful.
 
 ---
 
